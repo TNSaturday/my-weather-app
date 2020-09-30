@@ -28,19 +28,21 @@
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <ThreeColumns />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+// import HelloWorld from './components/HelloWorld';
+import ThreeColumns from './components/ThreeColumns';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    // HelloWorld,
+    ThreeColumns
   },
 
   data: () => ({
