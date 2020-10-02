@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <SearchBar @searchMade="getWeather"/>
+    <SearchBar @searchMade="getWeather2"/>
 
     <v-row align="center" justify="center">    
       <v-col
@@ -9,15 +9,8 @@
         md="6"
         lg="4"
       >
+        <ForecastList :weather="weather" :city="city"/>
         <v-sheet
-          min-height="70vh"
-          rounded="lg"
-          v-if="!error"
-        >
-          <ForecastList :weather="weather" :city="city"/>
-        </v-sheet>
-        <v-sheet
-          min-height="10vh"
           rounded="lg"
           v-if="error"
         >Cannot find weather for {{ city }} city, try another one
@@ -43,7 +36,7 @@ export default {
       apiKey: '1a3fd5fdc3ee67be59698b04be67963f',
       urlBase: 'https://api.openweathermap.org/data/2.5/forecast',
       query: '',
-      weather: {},
+      weather: [],
       city: '',
       error: false,
     }
@@ -66,7 +59,16 @@ export default {
       this.weather = results.list;
       this.city = results.city.name;
     },
-  },
-    
+    getWeather2(query) {
+      this.$store.dispatch('changeCity', query);
+      this.$store.dispatch('getWeather');
+      this.setResults2();
+      console.log(this.weather);
+    },
+    setResults2() {
+      this.city = this.$store.state.city;
+      this.weather = this.$store.state.weatherResults;
+    }
+  },    
 }
 </script>

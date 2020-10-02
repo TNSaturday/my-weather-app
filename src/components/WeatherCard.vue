@@ -18,7 +18,7 @@
           class="display-3"
           cols="6"
         >
-          {{ result.main.temp }}&deg; C
+          {{ result.main.temp }}&deg;C
         </v-col>
         <v-col cols="6">
           <v-img
