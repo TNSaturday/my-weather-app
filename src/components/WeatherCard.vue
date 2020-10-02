@@ -22,7 +22,7 @@
         </v-col>
         <v-col cols="6">
           <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/sun.png"
+            src="https://cdn.iconscout.com/icon/free/png-256/sun-planet-astrology-star-galxy-solar-system-darkhole-1-20784.png"
             alt="Sunny image"
             width="92"
           ></v-img>
