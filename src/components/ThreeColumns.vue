@@ -13,7 +13,7 @@
           min-height="70vh"
           rounded="lg"
         >
-          <WeatherCard />
+          <ForecastList :weather="weather"/>
         </v-sheet>
       </v-col>
     </v-row>
@@ -22,13 +22,13 @@
 </template>
 
 <script>
-import WeatherCard from './WeatherCard';
+import ForecastList from './ForecastList';
 import SearchBar from './SearchBar';
 
 export default {
   name: 'ThreeColumns',
   components: {
-    WeatherCard,
+    ForecastList,
     SearchBar,
   },
   data() {
