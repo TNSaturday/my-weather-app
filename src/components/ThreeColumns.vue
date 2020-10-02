@@ -12,13 +12,20 @@
         <v-sheet
           min-height="70vh"
           rounded="lg"
+          v-if="!error"
         >
-          <ForecastList :weather="weather"/>
+          <ForecastList :weather="weather" :city="city"/>
+        </v-sheet>
+        <v-sheet
+          min-height="10vh"
+          rounded="lg"
+          v-if="error"
+        >Cannot find weather for {{ city }} city, try another one
         </v-sheet>
       </v-col>
     </v-row>
 
-      </v-container>
+    </v-container>
 </template>
 
 <script>
@@ -37,6 +44,8 @@ export default {
       urlBase: 'https://api.openweathermap.org/data/2.5/forecast',
       query: '',
       weather: {},
+      city: '',
+      error: false,
     }
   },
   methods: {
@@ -46,10 +55,15 @@ export default {
         .then(res => {
           return res.json();
         })
-        .then(this.setResults);
+        .then(this.setResults)
+        .catch(() => {
+          this.city = query;
+          this.error = true;
+        });
     },
     setResults(results) {
-      this.weather = results;
+      this.weather = results.list;
+      this.city = results.city.name;
     },
   },
     
