@@ -50,6 +50,7 @@ export default {
   },
   methods: {
     getWeather(query) {
+      this.error = false;
       this.query = query;
       fetch(`${this.urlBase}?q=${this.query}&units=metric&cnt=5&appid=${this.apiKey}`)
         .then(res => {
