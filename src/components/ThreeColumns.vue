@@ -13,7 +13,7 @@
         <v-sheet
           rounded="lg"
           v-if="error"
-        >Cannot find weather for {{ city }} city, try another one
+        >Погода в городе {{ city }} не найдена, попробуйте другой город
         </v-sheet>
       </v-col>
     </v-row>
@@ -36,7 +36,6 @@ export default {
       apiKey: '1a3fd5fdc3ee67be59698b04be67963f',
       urlBase: 'https://api.openweathermap.org/data/2.5/forecast',
       query: '',
-      error: false,
     }
   },
   computed: {
@@ -46,26 +45,13 @@ export default {
     city() {
       return this.$store.state.city;
     },
+    error() {
+      return this.$store.state.error;
+    }
   },
   methods: {
-    getWeather(query) {
-      this.error = false;
-      this.query = query;
-      fetch(`${this.urlBase}?q=${this.query}&units=metric&cnt=5&appid=${this.apiKey}`)
-        .then(res => {
-          return res.json();
-        })
-        .then(this.setResults)
-        .catch(() => {
-          this.city = query;
-          this.error = true;
-        });
-    },
-    setResults(results) {
-      this.weather = results.list;
-      this.city = results.city.name;
-    },
     getFromStore(query) {
+      console.log(this.$router);
       this.$store.dispatch('getWeather', query);
     }
   },    

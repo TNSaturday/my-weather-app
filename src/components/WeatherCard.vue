@@ -1,5 +1,6 @@
 <template>
-  <v-card
+  <li>
+    <v-card
     class="mx-auto"
     max-width="400"
   >
@@ -16,11 +17,11 @@
       <v-row align="center">
         <v-col
           class="display-3"
-          cols="6"
+          cols="8"
         >
           {{ result.main.temp }}&deg;C
         </v-col>
-        <v-col cols="6">
+        <v-col cols="4">
           <v-img
             src="https://cdn.iconscout.com/icon/free/png-256/sun-planet-astrology-star-galxy-solar-system-darkhole-1-20784.png"
             alt="Sunny image"
@@ -34,27 +35,24 @@
       <v-list-item-icon>
         <v-icon>mdi-send</v-icon>
       </v-list-item-icon>
-      <v-list-item-subtitle>Wind speed {{ result.wind.speed }} m/s</v-list-item-subtitle>
+      <v-list-item-subtitle>Скорость ветра {{ result.wind.speed }} m/s</v-list-item-subtitle>
     </v-list-item>
 
     <v-list-item>
       <v-list-item-icon>
         <v-icon>mdi-cloud-download</v-icon>
       </v-list-item-icon>
-      <v-list-item-subtitle>Humidity {{ result.main.humidity }}%</v-list-item-subtitle>
+      <v-list-item-subtitle>Влажность {{ result.main.humidity }}%</v-list-item-subtitle>
     </v-list-item>
   </v-card>
+  <br>
+  </li>
 </template>
 
 <script>
 export default {
   name: 'WeatherCard',
   props: ['result', 'city'],
-  data () {
-    return {
-
-    }
-  },
   methods: {
     dateBuilder() {
       let d = new Date();

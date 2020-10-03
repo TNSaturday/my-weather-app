@@ -7,7 +7,7 @@
         hide-details
         rounded
         solo-inverted
-        placeholder="Search"
+        placeholder="Поиск"
         @keypress.enter="onInput"
       ></v-text-field>
     </v-col>

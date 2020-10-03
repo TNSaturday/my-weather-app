@@ -9,6 +9,7 @@ export default new Vuex.Store({
     weatherResults: [],
     apiKey: '1a3fd5fdc3ee67be59698b04be67963f',
     urlBase: 'https://api.openweathermap.org/data/2.5/forecast',
+    error: false,
   },
   getters: {
     city(state) {
@@ -24,6 +25,9 @@ export default new Vuex.Store({
     },
     saveWeather(state, results) {
       state.weatherResults = results;
+    },
+    toggleError(state) {
+      state.error = true;
     }
   },
   actions: {
