@@ -28,18 +28,31 @@ export default new Vuex.Store({
     },
     toggleError(state) {
       state.error = true;
+    },
+    initState(state) {
+      state.city = '';
+      state.weatherResults = [];
+      state.error = false;
     }
   },
   actions: {
     getWeather({state, commit}, city) {
+      commit('initState');
       commit('changeCity', city);
 
       fetch(`${state.urlBase}?q=${city}&units=metric&cnt=5&appid=${state.apiKey}`)
         .then(res => {
+          if (res.status === 404) {
+            commit('saveWeather', []);
+            return Promise.reject();
+          }
           return res.json();
         })
         .then(res => {
           this.dispatch('setResults', res.list);
+        })
+        .catch(() => {
+          commit('toggleError');
         });
     },
     setResults({commit}, results) {

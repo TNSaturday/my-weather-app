@@ -13,7 +13,7 @@
         <v-sheet
           rounded="lg"
           v-if="error"
-        >Погода в городе {{ city }} не найдена, попробуйте другой город
+        >Погода в городе '{{ city }}' не найдена, попробуйте другой город
         </v-sheet>
       </v-col>
     </v-row>
@@ -31,13 +31,6 @@ export default {
     ForecastList,
     SearchBar,
   },
-  data() {
-    return {
-      apiKey: '1a3fd5fdc3ee67be59698b04be67963f',
-      urlBase: 'https://api.openweathermap.org/data/2.5/forecast',
-      query: '',
-    }
-  },
   computed: {
     weather() {
       return this.$store.state.weatherResults;
@@ -51,9 +44,15 @@ export default {
   },
   methods: {
     getFromStore(query) {
-      console.log(this.$router);
+      this.$router.push(query).catch(()=>{});
       this.$store.dispatch('getWeather', query);
     }
-  },    
+  },
+  created() {
+    const path = this.$router.currentRoute.path.substr(1);
+    if (path !== '') {
+      this.getFromStore(path);
+    }
+  }    
 }
 </script>
