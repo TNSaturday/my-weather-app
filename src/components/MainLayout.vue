@@ -26,7 +26,7 @@ import ForecastList from './ForecastList';
 import SearchBar from './SearchBar';
 
 export default {
-  name: 'ThreeColumns',
+  name: 'MainLayout',
   components: {
     ForecastList,
     SearchBar,
