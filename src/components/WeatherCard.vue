@@ -9,7 +9,7 @@
         <v-list-item-title class="headline">
           {{ city }}
         </v-list-item-title>
-        <v-list-item-subtitle>{{ result.dt_txt }}</v-list-item-subtitle>
+        <v-list-item-subtitle>{{ dateBuilder(result.dt_txt) }}</v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
 
@@ -19,11 +19,11 @@
           class="display-3"
           cols="8"
         >
-          {{ result.main.temp }}&deg;C
+          {{ parseInt(result.main.temp) }}&deg;C
         </v-col>
         <v-col cols="4">
           <v-img
-            src="https://cdn.iconscout.com/icon/free/png-256/sun-planet-astrology-star-galxy-solar-system-darkhole-1-20784.png"
+            :src="weatherIcon"
             alt="Sunny image"
             width="92"
           ></v-img>
@@ -53,11 +53,16 @@
 export default {
   name: 'WeatherCard',
   props: ['result', 'city'],
+  computed: {
+    weatherIcon() {
+      return `http://openweathermap.org/img/wn/${this.result.weather[0].icon}@2x.png`;
+    }
+  },
   methods: {
-    dateBuilder() {
-      let d = new Date();
-      let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-      let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    dateBuilder(dateText) {
+      let d = new Date(dateText);
+      let months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+      let days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
       
       let day = days[d.getDay()];
       let date = d.getDate();

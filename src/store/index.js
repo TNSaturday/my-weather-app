@@ -50,6 +50,7 @@ export default new Vuex.Store({
         })
         .then(res => {
           this.dispatch('setResults', res.list);
+          console.log(res.list);
         })
         .catch(() => {
           commit('toggleError');
