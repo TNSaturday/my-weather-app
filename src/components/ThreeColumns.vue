@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <SearchBar @searchMade="getWeather2"/>
+    <SearchBar @searchMade="getFromStore"/>
 
     <v-row align="center" justify="center">    
       <v-col
@@ -18,7 +18,7 @@
       </v-col>
     </v-row>
 
-    </v-container>
+  </v-container>
 </template>
 
 <script>
@@ -36,10 +36,16 @@ export default {
       apiKey: '1a3fd5fdc3ee67be59698b04be67963f',
       urlBase: 'https://api.openweathermap.org/data/2.5/forecast',
       query: '',
-      weather: [],
-      city: '',
       error: false,
     }
+  },
+  computed: {
+    weather() {
+      return this.$store.state.weatherResults;
+    },
+    city() {
+      return this.$store.state.city;
+    },
   },
   methods: {
     getWeather(query) {
@@ -59,15 +65,8 @@ export default {
       this.weather = results.list;
       this.city = results.city.name;
     },
-    getWeather2(query) {
-      this.$store.dispatch('changeCity', query);
-      this.$store.dispatch('getWeather');
-      this.setResults2();
-      console.log(this.weather);
-    },
-    setResults2() {
-      this.city = this.$store.state.city;
-      this.weather = this.$store.state.weatherResults;
+    getFromStore(query) {
+      this.$store.dispatch('getWeather', query);
     }
   },    
 }

@@ -27,20 +27,19 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    changeCity({commit}, city) {
+    getWeather({state, commit}, city) {
       commit('changeCity', city);
-    },
-    getWeather({state, commit}) {
-      fetch(`${state.urlBase}?q=${state.city}&units=metric&cnt=5&appid=${state.apiKey}`)
+
+      fetch(`${state.urlBase}?q=${city}&units=metric&cnt=5&appid=${state.apiKey}`)
         .then(res => {
           return res.json();
         })
         .then(res => {
-          commit('saveWeather', res.list);
-        })
-        .then(() => {
-          console.log(state.weatherResults);
+          this.dispatch('setResults', res.list);
         });
+    },
+    setResults({commit}, results) {
+      commit('saveWeather', results);
     }
   }
 });
