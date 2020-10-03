@@ -10,11 +10,7 @@
         lg="4"
       >
         <ForecastList :weather="weather" :city="city"/>
-        <v-sheet
-          rounded="lg"
-          v-if="error"
-        >Погода в городе '{{ city }}' не найдена, попробуйте другой город
-        </v-sheet>
+        <v-alert v-if="error" type="error">Погода в городе '{{ city }}' не найдена, попробуйте другой город</v-alert>
       </v-col>
     </v-row>
 
